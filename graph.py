@@ -35,10 +35,14 @@ num_vertices = 5  # можна змінити кількість вершин
 g = Graph(num_vertices)
 
 # Рандомно додаємо ребра без петель
+density = 0.3
 for i in range(num_vertices):
     for j in range(num_vertices):
         if i != j:  # не дозволяємо петлі
-            g.adj_matrix[i][j] = random.randint(0, 1)
+            if random.random() < density:  # додаємо ребро з ймовірністю density
+                g.adj_matrix[i][j] = 1
+            else:
+                g.adj_matrix[i][j] = 0
 
 # --- Вивід ---
 print("Матриця суміжності:")
@@ -54,6 +58,7 @@ closure = g.warshall()
 print("\nМатриця досяжності (Уоршелл) без петель:")
 for row in closure:
     print(row)
+
 
 
 
