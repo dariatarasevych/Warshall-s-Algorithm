@@ -28,7 +28,7 @@ class Graph:
 
     def add_edge(self, u, v):
         if u == v:
-            return  # без петель
+            pass # без петель
 
         self.adj_matrix[u][v] = 1
         if v not in self.adj_list[u]:
@@ -91,7 +91,27 @@ class Graph:
         for i in range(self.n):
             print(i, ":", self.adj_list[i])
         print()
+
+# Алгоритм Уоршелла для матриці досяжності
+    def warshall(self):
+        reach = []
+        for row in self.adj_matrix:
+            reach.append(row)
+        for k in range(self.n):
+            for i in range(self.n):
+                for j in range(self.n):
+                    if reach[i][k] and reach[k][j]:
+                        reach[i][j] = 1
+        # Прибираємо петлі (діагональ)
+        for i in range(self.n):
+            reach[i][i] = 0
+        return reach
+
+
 g = Graph(n=5, density=0.3, oriented=True)
 
 g.print_matrix()
 g.print_list()
+
+g.warshall()
+g.print_matrix()
