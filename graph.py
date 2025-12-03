@@ -3,9 +3,6 @@ import networkx as nx
 import matplotlib.pyplot as plt
 import time
 
-from нормтайм import start_time, end_time
-
-
 class Graph:
     def __init__(self, n, density=0, oriented=True):
         # кількість вершин
@@ -145,3 +142,4 @@ g.warshall()
 
 g.print_matrix()
 g.visualize()
+
